@@ -1,0 +1,6 @@
+@Tarea2_ArquiSistemas_HostAddress = http://localhost:5110
+
+GET {{Tarea2_ArquiSistemas_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
