@@ -7,8 +7,13 @@ using Tarea2_ArquiSistemas.Src.Models;
 
 namespace Tarea2_ArquiSistemas.Src.Data
 {
-    public class DataContext(DbContextOptions<DataContext> options) : DbContext(options)
-{
-        public required DbSet<User> Users { get; set; }
-}
+    public class DataContext : DbContext
+    {
+        public DataContext(DbContextOptions<DataContext> options) : base(options)
+        {
+        }
+
+        // Define tus DbSets aquí
+        public DbSet<User> Users { get; set; }
+    }
 }
