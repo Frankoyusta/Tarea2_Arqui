@@ -47,6 +47,23 @@ namespace Tarea2_ArquiSistemas.Src.Controllers
                  return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
             }
         }
+
+        [HttpGet("{page}/{cantUser}")]
+        public async Task<ActionResult<List<GetUserDto>>> GetUsers(int page,int cantUser)
+        {
+            try
+            {
+                Console.WriteLine("Getting user by id");
+                var response = await _userService.GetUsers(page,cantUser);
+                return response;
+            }
+            catch (Exception ex)
+            {
+                
+                 return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
+            }
+        }
+        
         
     }
 }

@@ -11,6 +11,8 @@ namespace Tarea2_ArquiSistemas.Src.Services.Interfaces
     {
         Task<ActionResult<CreateUserResponseDto>> CreateUser(CreateUserDto createUserDto);
         Task<ActionResult<GetUserDto>> GetUserById(string uuid);
+
+        Task<ActionResult<List<GetUserDto>>> GetUsers(int page,int cantUser);
         
     }
 }

@@ -92,5 +92,26 @@ namespace Tarea2_ArquiSistemas.Src.Services
             }
            
         }
+
+        public async Task<ActionResult<List<GetUserDto>>> GetUsers(int page, int cantUser)
+        {
+            try
+            {
+                //Empezando la paginacion desde 0
+                var users = await _userRepository.GetUsers(page, cantUser);
+                var response = users.Select(user => new GetUserDto
+                {
+                    Nombre = user.Nombre,
+                    Apellido = user.Apellidos,
+                    CorreoElectronico = user.CorreoElectrónico
+                }).ToList();
+                return new OkObjectResult(response);
+            }
+            catch (Exception ex)
+            {
+                
+                 return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
+            }
+        }
     }
 }

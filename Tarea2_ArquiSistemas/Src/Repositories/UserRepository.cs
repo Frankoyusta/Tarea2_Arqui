@@ -46,5 +46,11 @@ namespace Tarea2_ArquiSistemas.Src.Repositories
             var response = await _dataContext.Users.FirstOrDefaultAsync(user => user.UUID == UUID);
             return response;
         }
+
+        public Task<List<User>> GetUsers(int page, int cantUser)
+        {
+            var response = _dataContext.Users.Skip(page * cantUser).Take(cantUser).ToListAsync();
+            return response;
+        }
     }
 }

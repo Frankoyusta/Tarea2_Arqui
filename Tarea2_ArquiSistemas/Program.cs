@@ -49,6 +49,13 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
+using (var scope = app.Services.CreateScope())
+{
+    var services = scope.ServiceProvider;
+    var dbContext = services.GetRequiredService<DataContext>();
+
+    DataSeeder.Initialize(services);
+}
 app.UseHttpsRedirection();
 app.UseRouting();
 
