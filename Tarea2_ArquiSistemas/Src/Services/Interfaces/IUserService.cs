@@ -13,6 +13,7 @@ namespace Tarea2_ArquiSistemas.Src.Services.Interfaces
         Task<ActionResult<GetUserDto>> GetUserById(string uuid);
         Task<ActionResult<List<GetUserDto>>> GetUsers(int page,int cantUser);
         Task<bool> UpdateUser(string uuid, UpdateUserDto updateUserDto);
+        Task<bool> DeleteUser(string uuid);
 
         
     }

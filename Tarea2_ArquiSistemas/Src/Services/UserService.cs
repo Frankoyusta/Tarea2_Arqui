@@ -118,5 +118,10 @@ namespace Tarea2_ArquiSistemas.Src.Services
         {
             return await _userRepository.UpdateUser(uuid, updateUserDto);
         }
+
+        public async Task<bool> DeleteUser(string uuid)
+        {
+            return await _userRepository.DeleteUser(uuid);
+        }
     }
 }

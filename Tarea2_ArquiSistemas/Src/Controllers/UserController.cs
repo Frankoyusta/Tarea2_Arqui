@@ -85,7 +85,24 @@ namespace Tarea2_ArquiSistemas.Src.Controllers
                 return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
             }
         }
-        
+
+       [HttpDelete("{uuid}")]
+        public async Task<IActionResult> DeleteUser(string uuid)
+        {
+            try
+            {
+                var result = await _userService.DeleteUser(uuid);
+                if (!result)
+                {
+                    return NotFound(new { Message = "User not found" });
+                }
+                return NoContent();
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
+            }
+        }
         
     }
 }

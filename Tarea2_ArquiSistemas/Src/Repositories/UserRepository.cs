@@ -44,13 +44,13 @@ namespace Tarea2_ArquiSistemas.Src.Repositories
 
         public async Task<User> getUserByUUID(string UUID)
         {
-            var response = await _dataContext.Users.FirstOrDefaultAsync(user => user.UUID == UUID);
+            var response = await _dataContext.Users.FirstOrDefaultAsync(user => user.UUID == UUID && !user.EstaEliminado);
             return response;
         }
 
         public Task<List<User>> GetUsers(int page, int cantUser)
         {
-            var response = _dataContext.Users.Skip(page * cantUser).Take(cantUser).ToListAsync();
+            var response = _dataContext.Users.Where(user => !user.EstaEliminado).Skip(page * cantUser).Take(cantUser).ToListAsync();
             return response;
         }
 
@@ -82,5 +82,20 @@ namespace Tarea2_ArquiSistemas.Src.Repositories
             await _dataContext.SaveChangesAsync();
             return true;
         }
+        
+        public async Task<bool> DeleteUser(string uuid)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UUID == uuid);
+            if (user == null)
+            {
+                return false;
+            }
+
+            user.EstaEliminado = true;
+            _dataContext.Users.Update(user);
+            await _dataContext.SaveChangesAsync();
+            return true;
+        }
+
     }
 }

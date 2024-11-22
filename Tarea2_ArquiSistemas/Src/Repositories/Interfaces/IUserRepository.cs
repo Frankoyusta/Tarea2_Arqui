@@ -14,6 +14,7 @@ namespace Tarea2_ArquiSistemas.Src.Repositories.Interfaces
         Task<User> getUserByUUID(string UUID);
         Task<List<User>> GetUsers(int page, int cantUser);
         Task<bool> UpdateUser(string UUID, UpdateUserDto updateUserDto);
+        Task<bool> DeleteUser(string UUID);
 
     }
 }
