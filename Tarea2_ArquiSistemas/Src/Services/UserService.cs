@@ -113,5 +113,10 @@ namespace Tarea2_ArquiSistemas.Src.Services
                  return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
             }
         }
+
+        public async Task<bool> UpdateUser(string uuid, UpdateUserDto updateUserDto)
+        {
+            return await _userRepository.UpdateUser(uuid, updateUserDto);
+        }
     }
 }

@@ -6,6 +6,7 @@ using Microsoft.EntityFrameworkCore;
 using Tarea2_ArquiSistemas.Src.Data;
 using Tarea2_ArquiSistemas.Src.Models;
 using Tarea2_ArquiSistemas.Src.Repositories.Interfaces;
+using Tarea2_ArquiSistemas.Src.Dto;
 
 namespace Tarea2_ArquiSistemas.Src.Repositories
 {
@@ -51,6 +52,35 @@ namespace Tarea2_ArquiSistemas.Src.Repositories
         {
             var response = _dataContext.Users.Skip(page * cantUser).Take(cantUser).ToListAsync();
             return response;
+        }
+
+        public async Task<bool> UpdateUser(string uuid, UpdateUserDto updateUserDto)
+        {
+            var user = await _dataContext.Users.FirstOrDefaultAsync(u => u.UUID == uuid);
+            if (user == null)
+            {
+                return false;
+            }
+
+            if (!string.IsNullOrEmpty(updateUserDto.Nombre))
+            {
+                user.Nombre = updateUserDto.Nombre;
+            }
+            if (!string.IsNullOrEmpty(updateUserDto.Apellidos))
+            {
+                user.Apellidos = updateUserDto.Apellidos;
+            }
+            if (!string.IsNullOrEmpty(updateUserDto.CorreoElectronico))
+            {
+                user.CorreoElectrónico = updateUserDto.CorreoElectronico;
+            }
+            if (!string.IsNullOrEmpty(updateUserDto.Contrasenia))
+            {
+                user.Contrasenia = updateUserDto.Contrasenia;
+            }
+            _dataContext.Users.Update(user);
+            await _dataContext.SaveChangesAsync();
+            return true;
         }
     }
 }

@@ -63,6 +63,28 @@ namespace Tarea2_ArquiSistemas.Src.Controllers
                  return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
             }
         }
+
+        [HttpPatch("{uuid}")]
+        public async Task<IActionResult> UpdateUser(string uuid, [FromBody] UpdateUserDto updateUserDto)
+        {
+            try
+            {
+                var result = await _userService.UpdateUser(uuid, updateUserDto);
+                if (result == null)
+                {
+                    return NotFound(new { Message = "User not found" });
+                }
+                return NoContent();
+            }
+            catch (ArgumentException ex)
+            {
+                return BadRequest(new { Message = ex.Message });
+            }
+            catch (Exception ex)
+            {
+                return new ObjectResult(new { Message = "Hubo un error con el servidor, intente nuevamente en otro momento" + ex.ToString() }) { StatusCode = 500 };
+            }
+        }
         
         
     }
