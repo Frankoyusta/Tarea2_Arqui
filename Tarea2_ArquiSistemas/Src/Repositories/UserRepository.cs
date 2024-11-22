@@ -40,5 +40,11 @@ namespace Tarea2_ArquiSistemas.Src.Repositories
             Console.WriteLine("Verificando correo" + response.ToString());
             return response;
         }
+
+        public async Task<User> getUserByUUID(string UUID)
+        {
+            var response = await _dataContext.Users.FirstOrDefaultAsync(user => user.UUID == UUID);
+            return response;
+        }
     }
 }

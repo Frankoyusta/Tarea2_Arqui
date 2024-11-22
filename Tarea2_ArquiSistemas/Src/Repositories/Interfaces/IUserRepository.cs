@@ -10,5 +10,6 @@ namespace Tarea2_ArquiSistemas.Src.Repositories.Interfaces
     {
         Task<bool> InsertUserInDb(User user);
         Task<bool> verifyEmail(string email);
+        Task<User> getUserByUUID(string UUID);
     }
 }

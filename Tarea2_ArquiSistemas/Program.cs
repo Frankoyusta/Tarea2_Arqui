@@ -1,9 +1,11 @@
 using Microsoft.EntityFrameworkCore;
 using Tarea2_ArquiSistemas.Src.Data;
+using Microsoft.IdentityModel.Tokens;
 using Tarea2_ArquiSistemas.Src.Repositories;
 using Tarea2_ArquiSistemas.Src.Repositories.Interfaces;
 using Tarea2_ArquiSistemas.Src.Services;
 using Tarea2_ArquiSistemas.Src.Services.Interfaces;
+using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -18,6 +20,26 @@ builder.Services.AddDbContext<DataContext>(options =>
 builder.Services.AddScoped<IUserRepository, UserRepository>();
 builder.Services.AddScoped<IUserService, UserService>();
 builder.Services.AddScoped<ITokenService, TokenService>();
+
+builder.Services.AddAuthentication().AddJwtBearer(options =>
+{
+    if (options != null)
+    {
+        options.TokenValidationParameters = new TokenValidationParameters()
+        {
+            ValidateIssuerSigningKey = true,
+            ValidateIssuer = false,
+            ValidateAudience = false,
+            IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(
+                builder.Configuration.GetSection("AppSettings:TokenKey").Value!))
+        };
+    }
+    else
+    {
+        throw new ArgumentNullException(nameof(options));
+    }
+});
+
 
 var app = builder.Build();
 

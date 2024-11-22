@@ -9,6 +9,8 @@ namespace Tarea2_ArquiSistemas.Src.Services.Interfaces
 {
     public interface IUserService
     {
-        Task<ActionResult<CreateUserResponseDto>> CreateUser(CreateUserDto createUserDto,string token);
+        Task<ActionResult<CreateUserResponseDto>> CreateUser(CreateUserDto createUserDto);
+        Task<ActionResult<GetUserDto>> GetUserById(string uuid);
+        
     }
 }
