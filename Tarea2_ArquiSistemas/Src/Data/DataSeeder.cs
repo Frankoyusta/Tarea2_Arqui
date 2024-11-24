@@ -15,21 +15,21 @@ namespace Tarea2_ArquiSistemas.Src.Data
             {
                 var context = scope.ServiceProvider.GetRequiredService<DataContext>();
             
-                 if (!context.Users.Any())
-                {
-                    var faker = new Faker<User>()
-                        .RuleFor(u => u.UUID, f => Guid.NewGuid().ToString())
-                        .RuleFor(u => u.Nombre, f => f.Person.FirstName)
-                        .RuleFor(u => u.Apellidos, f => f.Person.LastName)
-                        .RuleFor(u => u.CorreoElectrónico, f => f.Person.Email)
-                        .RuleFor(u => u.Contrasenia, f => BCrypt.Net.BCrypt.HashPassword("password"))
-                        .RuleFor(u => u.EstaEliminado, f => true);
+                 if (!context.Users.Any() || context.Users.All(u => u.EstaEliminado))
+                    {
+                        var faker = new Faker<User>()
+                            .RuleFor(u => u.UUID, f => Guid.NewGuid().ToString())
+                            .RuleFor(u => u.Nombre, f => f.Person.FirstName)
+                            .RuleFor(u => u.Apellidos, f => f.Person.LastName)
+                            .RuleFor(u => u.CorreoElectrónico, f => f.Person.Email)
+                            .RuleFor(u => u.Contrasenia, f => BCrypt.Net.BCrypt.HashPassword("password"))
+                            .RuleFor(u => u.EstaEliminado, f => false);
 
-                    var users = faker.Generate(100); 
+                        var users = faker.Generate(100); 
 
-                    context.Users.AddRange(users);
-                    context.SaveChanges();
-                }
+                        context.Users.AddRange(users);
+                        context.SaveChanges();
+                    }
                 }
             
             }
