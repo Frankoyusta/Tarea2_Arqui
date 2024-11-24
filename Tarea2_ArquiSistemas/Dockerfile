@@ -6,7 +6,7 @@ COPY . ./
 
 RUN mkdir -p /out && chmod -R 777 /out
 
-RUN dotnet publish /app/Tarea2_ArquiSistemas.csproj -c Release -o /temp_out
+RUN dotnet publish /app/Tarea2_ArquiSistemas/Tarea2_ArquiSistemas.csproj -c Release -o /temp_out
 
 RUN cp -r /temp_out/* /out
 
