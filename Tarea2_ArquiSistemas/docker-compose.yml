@@ -1,0 +1,9 @@
+services:
+  web:
+    image: tarea2-arquisistemas
+    volumes:
+      - ./data:/app
+    environment:
+      - ConnectionStrings__DefaultConnection=Data Source=/app/user_db.db
+    ports:
+      - "80:80"

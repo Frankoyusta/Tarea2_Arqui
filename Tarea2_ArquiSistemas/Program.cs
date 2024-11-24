@@ -43,12 +43,19 @@ builder.Services.AddAuthentication().AddJwtBearer(options =>
 
 var app = builder.Build();
 
-if (args.Contains("--apply-migrations"))
+using (var scope = app.Services.CreateScope())
 {
-    using (var scope = app.Services.CreateScope())
+    var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+    try
     {
-        var dbContext = scope.ServiceProvider.GetRequiredService<DataContext>();
+        Console.WriteLine("Aplicando migraciones...");
         dbContext.Database.Migrate();
+        DataSeeder.Initialize(scope.ServiceProvider);
+        Console.WriteLine("Migraciones aplicadas correctamente.");
+    }
+    catch (Exception ex)
+    {
+        Console.WriteLine($"Error al aplicar migraciones: {ex.Message}");
     }
 }
 // Configure the HTTP request pipeline.
