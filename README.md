@@ -2,7 +2,7 @@
 
 Este proyecto es una API REST desarrollada con .NET 8 que utiliza SQLite como base de datos. Está diseñada para realizar operaciones de búsqueda optimizadas. La API está desplegada y accesible en la siguiente URL:
 
-[https://searchservice-1.onrender.com](https://searchservice-1.onrender.com)
+[https://tarea2arquitecturadesistemas.onrender.com](https://tarea2arquitecturadesistemas.onrender.com)
 
 ## Características
 
@@ -50,11 +50,11 @@ Este proyecto es una API REST desarrollada con .NET 8 que utiliza SQLite como ba
 
 La API está desplegada en [Render](https://render.com) y puedes accederla en:
 
-[https://searchservice-1.onrender.com](https://searchservice-1.onrender.com)
+[https://tarea2arquitecturadesistemas.onrender.com](https://tarea2arquitecturadesistemas.onrender.com)
 
 ## Endpoints
 
-### SearchService
+### User Service
 
 - `https://searchservice-1.onrender.com/api/Search/searchStudent/{keyboardEnter}`
 - `https://searchservice-1.onrender.com/api/Search/searchByRestriction/{keyboardEnter}`
