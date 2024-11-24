@@ -12,12 +12,9 @@ RUN cp -r /temp_out/* /out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
 
-WORKDIR /app
-
 COPY --from=build /out /app
-COPY --from=build /app/Tarea2_ArquiSistemas/user_db.db /app/Tarea2_ArquiSistemas/user_db.db
 
-RUN chmod -R 777 /app
+WORKDIR /app
 
 EXPOSE 80
 
