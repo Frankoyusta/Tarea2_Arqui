@@ -1,15 +1,21 @@
 FROM mcr.microsoft.com/dotnet/sdk:8.0 AS build
+
 WORKDIR /app
-
-RUN chmod -R 777 /app
-
-COPY Tarea2_ArquiSistemas/Tarea2_ArquiSistemas.csproj ./
-RUN dotnet restore
 
 COPY . ./
-RUN dotnet publish -c Release -o /out
+
+RUN mkdir -p /out && chmod -R 777 /out
+
+RUN dotnet publish -c Release -o /temp_out
+
+RUN cp -r /temp_out/* /out
 
 FROM mcr.microsoft.com/dotnet/aspnet:8.0
+
+COPY --from=build /out /app
+
 WORKDIR /app
-COPY --from=build /out .
+
+EXPOSE 80
+
 ENTRYPOINT ["dotnet", "Tarea2_ArquiSistemas.dll"]
