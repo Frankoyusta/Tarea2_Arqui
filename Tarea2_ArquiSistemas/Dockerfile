@@ -15,7 +15,7 @@ FROM mcr.microsoft.com/dotnet/aspnet:8.0
 WORKDIR /app
 
 COPY --from=build /out /app
-COPY --from=build /app/user_db.db /app/user_db.db
+COPY --from=build /app/Tarea2_ArquiSistemas/user_db.db /app/Tarea2_ArquiSistemas/user_db.db
 
 RUN chmod -R 777 /app
 
