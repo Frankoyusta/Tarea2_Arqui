@@ -78,6 +78,7 @@ namespace Tarea2_ArquiSistemas.Src.Services
 
                 return new OkObjectResult(new GetUserDto
                 {
+                    UUID = user.UUID,
                     Nombre = user.Nombre,
                     Apellido = user.Apellidos,
                     CorreoElectronico = user.CorreoElectrónico
@@ -101,6 +102,7 @@ namespace Tarea2_ArquiSistemas.Src.Services
                 var users = await _userRepository.GetUsers(page, cantUser);
                 var response = users.Select(user => new GetUserDto
                 {
+                    UUID = user.UUID,
                     Nombre = user.Nombre,
                     Apellido = user.Apellidos,
                     CorreoElectronico = user.CorreoElectrónico
