@@ -1,4 +1,4 @@
-# SearchService API
+# CRUD Users API
 
 Este proyecto es una API REST desarrollada con .NET 8 que utiliza SQLite como base de datos. Está diseñada para realizar operaciones de búsqueda optimizadas. La API está desplegada y accesible en la siguiente URL:
 
